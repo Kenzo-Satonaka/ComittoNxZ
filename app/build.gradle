@@ -42,23 +42,16 @@ android {
         versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
         versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
         
-        ndk {
-            externalNativeBuild {
-                cmake {
-                    cppFlags += '-std=c++20'
-                }
+        // C++ビルド設定とCMakeオプションの集約（dav1d自動生成エラーの回避処理含む）
+        externalNativeBuild {
+            cmake {
+                cppFlags += '-std=c++20'
+                arguments "-DANDROID_ARM_MODE=arm", "-DAVIF_CODEC_DAV1D=OFF", "-DAVIF_LOCAL_DAV1D=OFF"
             }
         }
 
         // ビルド日時を参照できるようにする
         buildConfigField("long", "BUILD_DATE", System.currentTimeMillis().toString())
-
-        // CmakeLists.txt にオプションを定義する
-        externalNativeBuild {
-            cmake {
-                arguments("-DANDROID_ARM_MODE=arm")
-            }
-        }
     }
 
     applicationVariants.all { variant ->
