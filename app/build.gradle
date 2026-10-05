@@ -193,7 +193,7 @@ android {
     buildFeatures {
         buildConfig true
     }
-    lint {
+   lint {
         abortOnError false
         checkReleaseBuilds false
     }
