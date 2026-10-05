@@ -42,11 +42,15 @@ android {
         versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
         versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
         
-        // C++ビルド設定とCMakeオプションの集約（dav1d自動生成エラーの回避処理含む）
+        // C++ビルド設定とCMakeオプションの集約（dav1d自動生成エラーの回避処理）
         externalNativeBuild {
             cmake {
                 cppFlags += '-std=c++20'
-                arguments "-DANDROID_ARM_MODE=arm", "-DAVIF_CODEC_DAV1D=OFF", "-DAVIF_LOCAL_DAV1D=OFF"
+                arguments "-DANDROID_ARM_MODE=arm",
+                          "-DAVIF_CODEC_DAV1D=OFF",
+                          "-DAVIF_LOCAL_DAV1D=OFF",
+                          "-DAVIF_BUILD_APPS=OFF",
+                          "-DAVIF_BUILD_TESTS=OFF"
             }
         }
 
