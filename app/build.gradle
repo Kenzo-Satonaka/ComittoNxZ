@@ -181,19 +181,23 @@ android {
             version '4.1.2'
         }
     }
+
     productFlavors {
     }
-   // --- [ここから上書き] ---
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
     }
+
     buildFeatures {
         buildConfig true
     }
+
     lint {
         abortOnError false
         checkReleaseBuilds false
@@ -201,7 +205,6 @@ android {
 }
 
 dependencies {
-// --- [ここまで上書き] ---
     implementation 'androidx.activity:activity:1.13.0'
     implementation 'androidx.appcompat:appcompat:1.8.0'
     implementation 'androidx.core:core:1.19.1'
