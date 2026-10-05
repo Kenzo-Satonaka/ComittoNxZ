@@ -13,6 +13,7 @@ def revision = "CK"
 
 // アプリに署名するため以下のファイルを作成して signingConfig の設定を記述してください
 apply from:'../signingConfigs/release.gradle', to: android
+
 android {
 
     namespace packageName
@@ -25,8 +26,6 @@ android {
     //ndkVersion "27.0.12077973"
     //ndkVersion "24.0.8215888"
 
-
-   // --- [ここから上書き] ---
     defaultConfig {
         applicationId packageName
         targetSdk 37 // Android 17("CinnamonBun")
@@ -55,8 +54,6 @@ android {
         }
     }
 
-        signingConfig signingConfigs.release
-    }
     applicationVariants.all { variant ->
         variant.resValue 'string', 'application_id', variant.applicationId
         if (variant.buildType.name == "release") {
@@ -73,6 +70,7 @@ android {
             }
         }
     }
+
     buildTypes {
         release {
             ndk {
@@ -175,6 +173,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     externalNativeBuild {
         cmake {
             path file('src/main/jni/CMakeLists.txt')
