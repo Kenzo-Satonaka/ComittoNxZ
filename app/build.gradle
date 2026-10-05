@@ -26,12 +26,13 @@ android {
     //ndkVersion "24.0.8215888"
 
 
-   defaultConfig {
+   // --- [ここから上書き] ---
+    defaultConfig {
         applicationId packageName
         targetSdk 37 // Android 17("CinnamonBun")
         minSdk 24 // Android 7.0("Nougat")
 
-        // 32ビット整数上限を超えない自動バージョン管理（ビルド日時ベース）
+        // 32ビット整数上限を超えない自動バージョン管理
         versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
         versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
 
@@ -43,10 +44,10 @@ android {
             }
         }
 
-        // ビルド日時を参照できるようにする（既存の設定を保持）
+        // ビルド日時を参照できるようにする
         buildConfigField("long", "BUILD_DATE", System.currentTimeMillis().toString())
 
-        // CmakeLists.txt にオプションを定義する（既存の設定を保持）
+        // CmakeLists.txt にオプションを定義する
         externalNativeBuild {
             cmake {
                 arguments("-DANDROID_ARM_MODE=arm")
