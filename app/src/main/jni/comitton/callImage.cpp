@@ -467,13 +467,8 @@ JNIEXPORT jint JNICALL Java_src_comitton_jni_CallImgLibrary_ImageGetSize (JNIEnv
         }
     }
     else if (type == IMAGETYPE_AVIF){
-#ifdef DEBUG
-        LOGD("callImage: ImageGetSize : Call ImageGetSizeAvif.");
-#endif
-        ret = ImageGetSizeAvif(index, type, &iSize[0], &iSize[1]);
-        if (ret == 0 && gLoadError[index]) {
-            ret = -4;
-        }
+        // AVIFのC++独自デコードは非無効化（標準デコーダーに委任）
+        ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
     }
     else if (type == IMAGETYPE_HEIF){
         // なにもしない
@@ -613,13 +608,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_jni_CallImgLibrary_ImageConvert (JNIEnv
         ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
     }
     else if (type == IMAGETYPE_AVIF){
-        ret = LoadImageAvif(index, SET_BUFFER, &gImageData[index][gLoadPage[index]], gLoadPage[index], scale, nullptr);
-        if (ret < 0) {
-            LOGE("callImage: ImageConvert: LoadImageAvif() failed. return=%d", ret);
-        }
-        if (gLoadError[index] != 0) {
-            ret = -200 - IMAGETYPE_AVIF;
-        }
+        ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
     }
     else if (type == IMAGETYPE_HEIF){
         ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
@@ -694,13 +683,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_jni_CallImgLibrary_ImageGetBitmap (JNIE
         ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
     }
     else if (type == IMAGETYPE_AVIF){
-        ret = LoadImageAvif(index, SET_BITMAP, &gImageData[index][gLoadPage[index]], gLoadPage[index], scale, (WORD *)canvas);
-        if (ret < 0) {
-            LOGE("callImage: ImageGetBitmap: [error] LoadImageAvif() failed. return=%d", ret);
-        }
-        if (ret == 0 && gLoadError[index]) {
-            ret = -200 - IMAGETYPE_AVIF;
-        }
+        ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
     }
     else if (type == IMAGETYPE_HEIF){
         ret = ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT;
