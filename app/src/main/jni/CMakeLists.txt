@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(comitton C CXX ASM)
 
-# --- dav1d 自動コンパイルの回避設定（ここに追加） ---
-set(AVIF_CODEC_DAV1D OFF CACHE BOOL "" FORCE)
-set(AVIF_LOCAL_DAV1D OFF CACHE BOOL "" FORCE)
-set(AVIF_BUILD_APPS OFF CACHE BOOL "" FORCE)
-set(AVIF_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-# --------------------------------------------------
-
 include(FetchContent)
 include(GNUInstallDirs)
 
@@ -55,8 +48,15 @@ target_sources(comitton PRIVATE comitton/callUnrar.cpp)
 
 # 画像フォーマットデコーダーのビルド
 
-# AVIF
-add_subdirectory(dav1d)
+# AVIF (Android 13+ 標準デコーダー利用のため dav1d の C++ 自動ビルドを無効化)
+set(AVIF_CODEC_DAV1D OFF CACHE BOOL "" FORCE)
+set(AVIF_LOCAL_DAV1D OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_APPS OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+
+# dav1d 単体のサブディレクトリ呼び出しをスキップ
+# add_subdirectory(dav1d)
+
 add_subdirectory(libavif)
 target_sources(comitton PRIVATE comitton/ImageAVIF.cpp)
 
