@@ -26,6 +26,13 @@ jobs:
           sudo apt-get install -y ninja-build python3-pip nasm
           pip3 install meson
 
+      - name: Pre-clone dav1d source for libavif
+        run: |
+          mkdir -p app/src/main/jni/libavif/ext
+          if [ ! -d "app/src/main/jni/libavif/ext/dav1d" ]; then
+            git clone --recursive https://code.videolan.org/videolan/dav1d.git app/src/main/jni/libavif/ext/dav1d
+          fi
+
       - name: Make JNI build scripts executable
         run: |
           chmod -R +x app/src/main/jni/ || true
