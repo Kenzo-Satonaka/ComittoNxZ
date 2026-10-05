@@ -1093,8 +1093,8 @@ int ImageFilterPipeline(int index, int Page, int Half, int Count, int OrgWidth, 
 
 	pthread_t thread[gMaxThreadNum];
 	int start = 0;
-	ThreadParam param[gMaxThreadNum];
-	void *status[gMaxThreadNum];
+	std::vector<ThreadParam> param(gMaxThreadNum);
+	std::vector<void*> status(gMaxThreadNum);
 
 	for (int i = 0; i < gMaxThreadNum; i++) {
 		param[i].stindex   = start;
