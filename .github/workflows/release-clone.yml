@@ -8,7 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -21,6 +25,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ninja-build python3-pip
           pip3 install meson
+
+      - name: Make JNI build scripts executable
+        run: |
+          chmod -R +x app/src/main/jni/ || true
 
       - name: Change package name
         run: |
