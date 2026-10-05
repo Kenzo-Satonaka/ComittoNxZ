@@ -47,7 +47,7 @@ jobs:
           keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: comittonxd
           path: ${{steps.sign_apk.outputs.signedReleaseFile}}
