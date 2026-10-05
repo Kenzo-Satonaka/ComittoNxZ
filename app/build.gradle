@@ -3,9 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-def packageName = "jp.dip.muracoro.comittonx"
-// 今更だけどComittoNxA-v2って名前にすればよかった
-def applicationName = "ComittoNxX"
+def packageName = "com.github.mikotomaniax.comittonxz"
+def applicationName = "ComittoNxZ"
 
 def versionMajor = 2
 def versionMinor = 4
@@ -27,14 +26,14 @@ android {
     //ndkVersion "24.0.8215888"
 
 
-    defaultConfig {
+   defaultConfig {
         applicationId packageName
         targetSdk 37 // Android 17("CinnamonBun")
         minSdk 24 // Android 7.0("Nougat")
 
-        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${revision}"
-
+        // 32ビット整数上限を超えない自動バージョン管理（ビルド日時ベース）
+        versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
+        versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
 
         ndk {
             externalNativeBuild {
@@ -44,15 +43,16 @@ android {
             }
         }
 
-        // ビルド日時を 参照できるようにする
+        // ビルド日時を参照できるようにする（既存の設定を保持）
         buildConfigField("long", "BUILD_DATE", System.currentTimeMillis().toString())
 
-        // CmakeLists.txt にオプションを定義する
+        // CmakeLists.txt にオプションを定義する（既存の設定を保持）
         externalNativeBuild {
             cmake {
                 arguments("-DANDROID_ARM_MODE=arm")
             }
         }
+    }
 
         signingConfig signingConfigs.release
     }
