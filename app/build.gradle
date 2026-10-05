@@ -24,7 +24,7 @@ android {
     }
 
     namespace packageName
-    compileSdk 37 // Android 17("CinnamonBun")
+    compileSdk 35 // Android 15
 
     // 28にすると -lpthread が勝手に追加されてビルドできない時がある
     // C言語の書式バージョン問題でビルドエラーが発生する場合はndkバージョンを24まで下げること
@@ -35,13 +35,13 @@ android {
 
     defaultConfig {
         applicationId packageName
-        targetSdk 37 // Android 17("CinnamonBun")
-        minSdk 24 // Android 7.0("Nougat")
+        targetSdk 35 // Android 15
+        minSdk 33 // Android 13 ("Tiramisu")
 
         // 32ビット整数上限を超えない自動バージョン管理
         versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
         versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
-
+        
         ndk {
             externalNativeBuild {
                 cmake {
