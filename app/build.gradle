@@ -188,7 +188,7 @@ android {
         targetCompatibility JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
+        jvmTarget = '21'
     }
     buildFeatures {
         buildConfig true
