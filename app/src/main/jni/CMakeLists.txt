@@ -48,15 +48,8 @@ target_sources(comitton PRIVATE comitton/callUnrar.cpp)
 
 # 画像フォーマットデコーダーのビルド
 
-# AVIF (Android 13+ 標準デコーダー利用のため dav1d / libavif の内部ビルドをスキップ)
-# libavif/CMakeLists.txt 内の dav1d 依存 COPY 処理によるエラーを無効化
-set(AVIF_CODEC_DAV1D OFF CACHE BOOL "" FORCE)
-set(AVIF_LOCAL_DAV1D OFF CACHE BOOL "" FORCE)
-set(AVIF_BUILD_APPS OFF CACHE BOOL "" FORCE)
-set(AVIF_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-
-# libavif のラッパー（ImageAVIF.cpp）のみをコンパイル対象に含める
-target_sources(comitton PRIVATE comitton/ImageAVIF.cpp)
+# AVIF (Android 12/13+ 標準デコーダー利用のため NDK 側の C++ デコード処理はビルド対象から外す)
+# target_sources(comitton PRIVATE comitton/ImageAVIF.cpp)
 
 # JXL
 add_subdirectory(libjxl)
