@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 project(comitton C CXX ASM)
+
+# --- dav1d 自動コンパイルの回避設定（ここに追加） ---
+set(AVIF_CODEC_DAV1D OFF CACHE BOOL "" FORCE)
+set(AVIF_LOCAL_DAV1D OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_APPS OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+# --------------------------------------------------
+
 include(FetchContent)
 include(GNUInstallDirs)
 
