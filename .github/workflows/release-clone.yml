@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -34,10 +35,10 @@ jobs:
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       run: |
+        run: |
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
-          
+
       - name: Sign APK
         id: sign_apk
         uses: r0adkll/sign-android-release@v1
@@ -51,5 +52,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
+          name: comittonxd
+          path: ${{steps.sign_apk.outputs.signedReleaseFile}}
           name: comittonxd
           path: ${{steps.sign_apk.outputs.signedReleaseFile}}
