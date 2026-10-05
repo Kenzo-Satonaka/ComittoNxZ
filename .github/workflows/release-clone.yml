@@ -26,12 +26,22 @@ jobs:
           sudo apt-get install -y ninja-build python3-pip nasm
           pip3 install meson
 
-      - name: Pre-clone dav1d source for libavif
+      - name: Setup Meson Cross Files Directory
         run: |
-          mkdir -p app/src/main/jni/libavif/ext
-          if [ ! -d "app/src/main/jni/libavif/ext/dav1d" ]; then
-            git clone --recursive https://code.videolan.org/videolan/dav1d.git app/src/main/jni/libavif/ext/dav1d
-          fi
+          mkdir -p UNIX
+          cat << 'EOF' > UNIX/aarch64-android.meson
+          [binaries]
+          c = 'aarch64-linux-android-clang'
+          cpp = 'aarch64-linux-android-clang++'
+          ar = 'llvm-ar'
+          strip = 'llvm-strip'
+
+          [host_machine]
+          system = 'android'
+          cpu_family = 'aarch64'
+          cpu = 'aarch64'
+          endian = 'little'
+          EOF
 
       - name: Make JNI build scripts executable
         run: |
