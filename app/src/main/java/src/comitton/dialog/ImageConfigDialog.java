@@ -7,7 +7,7 @@ import src.comitton.common.ExternalFilterData;
 import src.comitton.common.Logcat;
 import src.comitton.config.SetImageActivity;
 import src.comitton.dialog.ListDialog.ListSelectListener;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.imageview.ImageManager;
 
 import android.annotation.SuppressLint;

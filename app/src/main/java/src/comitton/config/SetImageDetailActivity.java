@@ -11,7 +11,7 @@ import src.comitton.config.seekbar.ScrlDiagSeekbar;
 import src.comitton.config.SetCommonActivity;
 import src.comitton.helpview.HelpActivity;
 import src.comitton.common.DEF;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;

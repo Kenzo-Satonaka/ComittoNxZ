@@ -11,7 +11,7 @@ import src.comitton.fileview.filelist.RecordList;
 import src.comitton.fileview.view.DrawNoticeListener;
 import src.comitton.fileview.view.list.ListSwitcher.ListSwitcherListener;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 import android.app.Activity;
 import android.content.Context;

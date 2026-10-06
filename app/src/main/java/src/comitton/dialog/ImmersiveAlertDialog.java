@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 @SuppressLint("NewApi")
 public class ImmersiveAlertDialog extends AlertDialog {

@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;
 import src.comitton.fileaccess.WorkStream;

@@ -14,7 +14,7 @@ import android.view.View;
 
 import java.io.FileInputStream;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 @SuppressLint("ViewConstructor")
 public class SelectIconViewCustom extends View {

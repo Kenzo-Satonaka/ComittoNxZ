@@ -1,6 +1,6 @@
 package src.comitton.fileview.view;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.TextFormatter;
 import android.annotation.SuppressLint;
 import android.content.Context;

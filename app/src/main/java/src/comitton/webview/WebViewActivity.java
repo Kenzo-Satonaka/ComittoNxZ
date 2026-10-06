@@ -44,7 +44,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Base64;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.ExternalFilterData;
 import src.comitton.common.Logcat;
 import src.comitton.common.DEF;

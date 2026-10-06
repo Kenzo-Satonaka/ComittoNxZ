@@ -24,7 +24,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.EventListener;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;
 import src.comitton.fileaccess.SafFileAccess;

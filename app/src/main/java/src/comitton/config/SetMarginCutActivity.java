@@ -8,7 +8,7 @@ import src.comitton.config.seekbar.MarginLimitSeekbar;
 import src.comitton.helpview.HelpActivity;
 import src.comitton.common.DEF;
 import src.comitton.config.SetCommonActivity;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.Logcat;
 import android.content.Intent;
 import android.content.SharedPreferences;

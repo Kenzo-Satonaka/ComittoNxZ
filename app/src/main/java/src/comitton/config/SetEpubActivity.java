@@ -24,7 +24,7 @@ import src.comitton.config.seekbar.EpubMarginHSeekbar;
 import src.comitton.config.seekbar.EpubMarginWSeekbar;
 import src.comitton.config.SetCommonActivity;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 
 public class SetEpubActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {

@@ -26,7 +26,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.Logcat;
 import src.comitton.common.DEF;
 import src.comitton.config.seekbar.CornerEndHeightTextLevelSeekbar;

@@ -1,6 +1,6 @@
 package src.comitton.dialog;
 
-import jp.dip.muracoro.comittonx.BuildConfig;
+import com.github.mikotomaniax.comittonxz.BuildConfig;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,7 +45,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.Logcat;
 
 @SuppressLint("NewApi")

@@ -32,8 +32,8 @@ import java.util.zip.ZipFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jp.dip.muracoro.comittonx.BuildConfig;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.BuildConfig;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.Logcat;
 import src.comitton.common.EpubWebViewSharedData;
 import src.comitton.common.CustomKeySharedData;

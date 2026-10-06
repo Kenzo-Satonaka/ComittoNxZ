@@ -31,7 +31,7 @@ import java.io.OutputStream;
 
 import src.comitton.common.DEF;
 import src.comitton.fileview.FileSelectActivity;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 public class SetBookmarkSyncActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 

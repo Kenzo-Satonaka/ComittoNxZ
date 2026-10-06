@@ -2,7 +2,7 @@ package src.comitton.fileview.view.list;
 
 import java.util.ArrayList;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.common.ImageAccess;
 import src.comitton.common.Logcat;

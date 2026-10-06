@@ -7,7 +7,7 @@ import java.util.EventListener;
 import src.comitton.common.DEF;
 import src.comitton.config.SetImageActivity;
 import src.comitton.dialog.ListDialog.ListSelectListener;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.imageview.ImageActivity;
 import src.comitton.imageview.MyImageView;
 

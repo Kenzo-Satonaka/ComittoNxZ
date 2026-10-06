@@ -4,7 +4,7 @@ import src.comitton.common.DEF;
 import src.comitton.common.Logcat;
 import src.comitton.imageview.ImageManager;
 import src.comitton.imageview.ThumbnailView;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;

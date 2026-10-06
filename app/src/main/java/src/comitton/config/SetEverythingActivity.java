@@ -15,7 +15,7 @@ import androidx.preference.PreferenceManager;
 
 import src.comitton.common.DEF;
 import src.comitton.fileview.FileSelectActivity;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 public class SetEverythingActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 

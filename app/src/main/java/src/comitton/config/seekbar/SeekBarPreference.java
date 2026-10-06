@@ -1,7 +1,7 @@
 package src.comitton.config.seekbar;
 
 import src.comitton.common.DEF;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.dialog.ImageConfigDialog;
 
 import android.content.Context;

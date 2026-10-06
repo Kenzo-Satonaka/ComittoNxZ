@@ -1,7 +1,7 @@
 package src.comitton.config;
 
 import src.comitton.common.DEF;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 

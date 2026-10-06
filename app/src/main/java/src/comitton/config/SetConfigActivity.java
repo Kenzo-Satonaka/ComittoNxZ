@@ -5,7 +5,7 @@ import src.comitton.common.DEF;
 import src.comitton.config.SetCommonActivity;
 import src.comitton.fileview.FileSelectActivity;
 import src.comitton.textview.EpubWebViewActivity;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 import android.app.Activity;
 import android.content.Intent;

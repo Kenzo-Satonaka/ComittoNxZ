@@ -31,8 +31,8 @@ import android.widget.Toast;
 import androidx.annotation.StringRes;
 import androidx.core.app.ActivityCompat;
 
-import jp.dip.muracoro.comittonx.BuildConfig;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.BuildConfig;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.fileaccess.FileAccess;
 import src.comitton.fileview.data.FileData;
 

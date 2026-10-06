@@ -1,6 +1,6 @@
 package src.comitton.dialog;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 import android.app.Activity;
 import android.app.Dialog;

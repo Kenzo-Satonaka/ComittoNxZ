@@ -8,8 +8,8 @@ import jcifs.context.SingletonContext;
 import jcifs.smb.NtlmPasswordAuthenticator;
 import jcifs.smb.SmbFile;
 import jcifs.smb.SmbRandomAccessFile;
-import jp.dip.muracoro.comittonx.BuildConfig;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.BuildConfig;
+import com.github.mikotomaniax.comittonxz.R;
 
 import android.content.Context;
 import android.content.Intent;

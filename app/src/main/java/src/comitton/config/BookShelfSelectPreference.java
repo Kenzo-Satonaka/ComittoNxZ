@@ -4,7 +4,7 @@ package src.comitton.config;
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;
 import src.comitton.fileview.view.SelectIconView;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.fileview.view.SelectIconViewCustom;
 
 import android.app.AlertDialog;

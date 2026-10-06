@@ -23,7 +23,7 @@ import src.comitton.fileview.view.DrawNoticeListener;
 import src.comitton.imageview.ImageActivity;
 import src.comitton.jni.CallImgLibrary;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

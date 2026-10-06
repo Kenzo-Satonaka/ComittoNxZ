@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import org.apache.commons.io.FileUtils;
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;

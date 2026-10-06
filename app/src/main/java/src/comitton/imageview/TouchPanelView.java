@@ -3,7 +3,7 @@ package src.comitton.imageview;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;
 import src.comitton.config.SetCornerEndEpubWebViewActivity;

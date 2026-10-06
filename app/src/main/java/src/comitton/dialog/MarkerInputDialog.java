@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.EventListener;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 @SuppressLint("NewApi")
 public class MarkerInputDialog extends ImmersiveDialog implements OnClickListener, OnDismissListener {

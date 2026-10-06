@@ -13,7 +13,7 @@ import android.preference.PreferenceManager;
 
 import src.comitton.config.SetCommonActivity;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.fileaccess.SmbFileAccess;
 

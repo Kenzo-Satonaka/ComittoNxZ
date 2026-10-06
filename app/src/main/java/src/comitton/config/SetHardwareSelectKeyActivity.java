@@ -12,7 +12,7 @@ import android.view.WindowManager;
 
 import androidx.preference.PreferenceManager;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.config.SetCommonActivity;
 
 // ビューアとファイルリストのハードウェアキーの管理のリストビューを選択する

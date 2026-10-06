@@ -28,7 +28,7 @@ import src.comitton.config.seekbar.RedLevelSeekbar;
 import src.comitton.config.seekbar.GreenLevelSeekbar;
 import src.comitton.config.seekbar.BlueLevelSeekbar;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.Logcat;
 import src.comitton.common.DEF;
 import src.comitton.dialog.ImageConfigDialog;

@@ -3,7 +3,7 @@ package src.comitton.fileview.filelist;
 import java.io.File;
 import java.net.URLEncoder;
 
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 
 import src.comitton.common.DEF;
 import src.comitton.common.Logcat;

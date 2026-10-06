@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import androidx.preference.PreferenceManager;
 
 import src.comitton.common.Logcat;
-import jp.dip.muracoro.comittonx.R;
+import com.github.mikotomaniax.comittonxz.R;
 import src.comitton.common.DEF;
 import src.comitton.config.SetCommonActivity;
 
