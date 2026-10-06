@@ -97,7 +97,7 @@ android {
             applicationIdSuffix ".debug"
             resValue("string", "app_name", "${applicationName}[debug]")
             resValue("string", "app_launch_name", "${applicationName}[debug]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_debug")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_debug")
             manifestPlaceholders = [icon: "@drawable/comittonxx_debug"]
             debuggable true
             minifyEnabled false
@@ -110,7 +110,7 @@ android {
             applicationIdSuffix ".debug32"
             resValue("string", "app_name", "${applicationName}[debug32]")
             resValue("string", "app_launch_name", "${applicationName}[deb32]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_debug")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_debug")
             manifestPlaceholders = [icon: "@drawable/comittonxx_debug"]
             debuggable true
             minifyEnabled false
@@ -123,7 +123,7 @@ android {
             applicationIdSuffix ".arm64"
             resValue("string", "app_name", "${applicationName}[arm64]")
             resValue("string", "app_launch_name", "${applicationName}[arm64]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_arm64")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_arm64")
             manifestPlaceholders = [icon: "@drawable/comittonxx_arm64"]
             debuggable false
             minifyEnabled true
@@ -138,7 +138,7 @@ android {
             applicationIdSuffix ".arm32"
             resValue("string", "app_name", "${applicationName}[arm32]")
             resValue("string", "app_launch_name", "${applicationName}[arm32]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_arm32")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_arm32")
             manifestPlaceholders = [icon: "@drawable/comittonxx_arm32"]
             debuggable false
             minifyEnabled true
@@ -153,7 +153,7 @@ android {
             applicationIdSuffix ".x64"
             resValue("string", "app_name", "${applicationName}[x64]")
             resValue("string", "app_launch_name", "${applicationName}[x64]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_x64")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_x64")
             manifestPlaceholders = [icon: "@drawable/comittonxx_x64"]
             debuggable false
             minifyEnabled true
@@ -168,7 +168,7 @@ android {
             applicationIdSuffix ".x86"
             resValue("string", "app_name", "${applicationName}[x86]")
             resValue("string", "app_launch_name", "${applicationName}[x86]")
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx_x86")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_x86")
             manifestPlaceholders = [icon: "@drawable/comittonxx_x86"]
             debuggable false
             minifyEnabled true
