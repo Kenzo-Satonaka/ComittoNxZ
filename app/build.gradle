@@ -82,7 +82,7 @@ android {
             }
             resValue("string", "app_name", applicationName)
             resValue("string", "app_launch_name", applicationName)
-            buildConfigField("int", "icon", "jp.dip.muracoro.comittonx.R.drawable.comittonxx")
+            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx")
             manifestPlaceholders = [icon: "@drawable/comittonxx"]
             debuggable false
             minifyEnabled true
