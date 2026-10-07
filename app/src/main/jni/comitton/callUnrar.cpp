@@ -132,23 +132,29 @@ JNIEXPORT jint JNICALL Java_src_comitton_jni_CallJniLibrary_rarDecomp(JNIEnv *en
 		memcpy(ToBuff.get(), FromBuff.get(), OrigLen);
 	}
 	else {
-		DataIO.CurUnpRead = 0;
-		DataIO.CurUnpWrite = 0;
-		DataIO.UnpVolume = 0;
-		DataIO.NextVolumeMissing = false;
-		DataIO.SetPackedSizeToRead(CompLen);
-	
-		DataIO.SetUnpackFromMemory(FromBuff.get(), CompLen);
-		DataIO.SetUnpackToMemory(ToBuff.get(), OrigLen);
+        DataIO.CurUnpRead = 0;
+        DataIO.CurUnpWrite = 0;
+        DataIO.UnpVolume = 0;
+        DataIO.NextVolumeMissing = false;
+        DataIO.SetPackedSizeToRead(CompLen);
+    
+        // UnRAR 7.1.2 対応: SetUnpackFromMemory / SetUnpackToMemory の置き換え
+        // メモリ入力バッファと出力バッファを直接設定
+        DataIO.UnpPackedBuf = FromBuff.get();
+        DataIO.UnpVolumeSize = CompLen;
+        
+        // 展開先（解凍後）メモリバッファと目的サイズの指定
+        DataIO.UnpWriteBuf = ToBuff.get();
+        DataIO.SetPackedSize(CompLen);
 
-#if 0	// COMITTONxT_MOD
-		memset(Window, 0, MAXWINSIZE);
+#if 0    // COMITTONxT_MOD
+        memset(Window, 0, MAXWINSIZE);
 #else
         // 内部確保領域なので対処不要？
 #endif
-		Unp->SetDestSize(OrigLen);
-		Unp->DoUnpack(RarVersion, false);
-	}
+        Unp->SetDestSize(OrigLen);
+        Unp->DoUnpack(RarVersion, false);
+    }
 	return 0;
 }
 

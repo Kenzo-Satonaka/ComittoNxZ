@@ -23,7 +23,8 @@ android {
         }
     }
 
-    namespace packageName
+    // Javaソースコード内の R クラス参照（jp.dip.muracoro.comittont.R）と合わせるため変更
+    namespace "jp.dip.muracoro.comittont"
     compileSdk 35 // Android 15
 
     // 28にすると -lpthread が勝手に追加されてビルドできない時がある
