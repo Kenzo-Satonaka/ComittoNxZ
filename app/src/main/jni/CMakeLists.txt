@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(comitton C CXX ASM)
 
+# FetchContent などのモジュールを読み込み
 include(FetchContent)
 include(GNUInstallDirs)
 
@@ -11,7 +12,7 @@ add_definitions(
         "-Werror=unguarded-availability"
 )
 
-# ローカルソースのリスト
+# comitton ソース
 set(
   COMITTON_SOURCES
   comitton/ImageBlur.cpp
@@ -35,21 +36,30 @@ set(
   comitton/callImage.cpp
   comitton/TextCommon.cpp
   comitton/callText.cpp
+  comitton/callUnrar.cpp
 )
 
-add_library(
-  comitton SHARED
-  ${COMITTON_SOURCES}
+# unrar ソース（jni/unrar を参照するため 相対パスは unrar/ ）
+set(
+  UNRAR_SOURCES
+  unrar/cmddata.cpp
+  unrar/consio.cpp
+  unrar/extract.cpp
+  unrar/filestr.cpp
+  unrar/recvol.cpp
+  unrar/rs.cpp
+  unrar/scantree.cpp
+  unrar/ui.cpp
 )
 
-# rar 解凍ライブラリのビルド
-add_subdirectory(unrar)
-target_sources(comitton PRIVATE comitton/callUnrar.cpp)
+# unrar をスタティックライブラリとして作成
+add_library(unrar STATIC ${UNRAR_SOURCES})
+target_compile_definitions(unrar PRIVATE SILENT RARDLL)
+target_include_directories(unrar PUBLIC unrar)
 
-# 画像フォーマットデコーダーのビルド
-
-# AVIF (Android 12/13+ 標準デコーダー利用のため NDK 側の C++ デコード処理はビルド対象から外す)
-# target_sources(comitton PRIVATE comitton/ImageAVIF.cpp)
+# comitton 共有ライブラリ作成
+add_library(comitton SHARED ${COMITTON_SOURCES})
+target_link_libraries(comitton unrar android jnigraphics log)
 
 # JXL
 add_subdirectory(libjxl)
@@ -57,4 +67,3 @@ target_sources(comitton PRIVATE comitton/ImageJXL.cpp)
 
 # 生成処理
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(comitton android jnigraphics log)
