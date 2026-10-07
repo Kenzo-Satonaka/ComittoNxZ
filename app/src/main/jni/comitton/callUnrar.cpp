@@ -145,7 +145,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_jni_CallJniLibrary_rarDecomp(JNIEnv *en
         
         // 展開先（解凍後）メモリバッファと目的サイズの指定
         DataIO.UnpWriteBuf = ToBuff.get();
-        DataIO.UnpPackedSize = CompLen;
+        DataIO.SetPackedSize(CompLen);
 
 #if 0    // COMITTONxT_MOD
         memset(Window, 0, MAXWINSIZE);
