@@ -1,49 +1,31 @@
-FetchContent_Declare(libjxl
-        GIT_REPOSITORY https://github.com/libjxl/libjxl
-        GIT_TAG v0.11.1
-        BINARY_DIR build
-        SUBBUILD_DIR subbuild
-)
+# libjxl/CMakeLists.txt
+cmake_minimum_required(VERSION 3.18.1)
 
-#option(JPEGXL_STATIC "" ON)
-option(JPEGXL_FORCE_SYSTEM_BROTLI "" OFF)
-option(JPEGXL_FORCE_SYSTEM_HWY "" OFF)
-option(BUILD_TESTING "" OFF)
-option(JPEGXL_BUNDLE_LIBPNG "" OFF)
-option(JPEGXL_ENABLE_VIEWERS "" OFF)
-option(JPEGXL_ENABLE_COVERAGE "" OFF)
-option(JPEGXL_ENABLE_FUZZERS "" OFF)
-option(JPEGXL_ENABLE_DOXYGEN "" OFF)
-option(JPEGXL_ENABLE_MANPAGES "" OFF)
-option(JPEGXL_ENABLE_EXAMPLES "" OFF)
-option(JPEGXL_ENABLE_SJPEG "" OFF)
-option(JPEGXL_ENABLE_OPENEXR "" OFF)
-option(JPEGXL_ENABLE_TRANSCODE_JPEG "" OFF)
-option(JPEGXL_ENABLE_TOOLS "" OFF)
-option(JPEGXL_ENABLE_BENCHMARK "" OFF)
-option(JPEGXL_ENABLE_JPEGLI "" OFF)
-option(JPEGXL_ENABLE_JNI "" OFF)
-option(JPEGXL_ENABLE_DEVTOOLS "" OFF)
-option(JPEGXL_ENABLE_BENCHMARK "" OFF)
+# project()の前に設定オプションを宣言
+option(BUILD_TESTING "Build libjxl tests" OFF)
+option(JPEGXL_ENABLE_BENCHMARK "Build benchmark tools" OFF)
+option(JPEGXL_ENABLE_EXAMPLES "Build examples" OFF)
+option(JPEGXL_ENABLE_MANPAGES "Build man pages" OFF)
+option(JPEGXL_ENABLE_TOOLS "Build tools" OFF)
+option(JPEGXL_ENABLE_SKCMS "Build with skcms" OFF)
 
-FetchContent_GetProperties(libjxl)
+# 言語指定なしで宣言（親のCMakeLists.txtのC++環境を使用）
+project(libjxl NONE)
 
-if(NOT libjxl_POPULATED)
-    FetchContent_MakeAvailable(libjxl)
+# 必須依存関係（Android NDK内蔵のzlib）
+find_package(ZLIB REQUIRED)
+
+# third_party/highway の追加（存在確認付き）
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/highway/CMakeLists.txt")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/third_party/highway" "${CMAKE_CURRENT_BINARY_DIR}/third_party/highway")
 endif()
 
-target_include_directories(comitton PRIVATE
-        ${libjxl_BINARY_DIR}
-        ${libjxl_SOURCE_DIR}
-        $<TARGET_PROPERTY:hwy,INCLUDE_DIRECTORIES>
-)
+# third_party/brotli の追加（存在確認付き）
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/brotli/CMakeLists.txt")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/third_party/brotli" "${CMAKE_CURRENT_BINARY_DIR}/third_party/brotli")
+endif()
 
-target_link_libraries(comitton
-        jxl_dec
-        jxl_threads
-        brotlidec
-        brotlienc
-        brotlicommon
-        hwy
-        -Wl,--allow-multiple-definition
-)
+# JXL コアライブラリの追加（存在確認付き）
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/lib/CMakeLists.txt")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib" "${CMAKE_CURRENT_BINARY_DIR}/lib")
+endif()

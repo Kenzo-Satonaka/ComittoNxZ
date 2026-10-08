@@ -1,69 +1,105 @@
-cmake_minimum_required(VERSION 3.16)
-project(comitton C CXX ASM)
+cmake_minimum_required(VERSION 3.18.1)
 
-# FetchContent などのモジュールを読み込み
+project("comitton")
+
 include(FetchContent)
-include(GNUInstallDirs)
 
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_definitions(
-        "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__"
-        "-Werror=unguarded-availability"
+# ------------------------------------------------------------------------------
+# 1. 依存ライブラリの追加 (libjxl & libavif)
+# ------------------------------------------------------------------------------
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/CMakeLists.txt")
+    add_subdirectory(libjxl)
+endif()
+
+# libavif の不要機能フラグ設定
+set(AVIF_CODEC_DAV1D OFF CACHE BOOL "" FORCE)
+set(AVIF_CODEC_AOM OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_APPS OFF CACHE BOOL "" FORCE)
+set(AVIF_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libavif/CMakeLists.txt")
+    add_subdirectory(libavif)
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/avif/CMakeLists.txt")
+    add_subdirectory(avif)
+endif()
+
+# ------------------------------------------------------------------------------
+# 2. メインライブラリ "comitton" の定義
+# ------------------------------------------------------------------------------
+file(GLOB_RECURSE COMITTON_SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.c"
 )
 
-# comitton ソース
-set(
-  COMITTON_SOURCES
-  comitton/ImageBlur.cpp
-  comitton/ImageScaleHalf.cpp
-  comitton/ImageCommon.cpp
-  comitton/ImageThumbnail.cpp
-  comitton/ImageScaleLinear.cpp
-  comitton/ImageScaleCubic.cpp
-  comitton/ImageScaleLanczos3.cpp
-  comitton/ImageScaleNear.cpp
-  comitton/ImageScale.cpp
-  comitton/ImageBright.cpp
-  comitton/ImageRotate.cpp
-  comitton/ImageMarginCut.cpp
-  comitton/ImageSharpen.cpp
-  comitton/ImageInvert.cpp
-  comitton/ImageGray.cpp
-  comitton/ImageHalf.cpp
-  comitton/ImageColorMatrix.cpp
-  comitton/ImageExternalFilter.cpp
-  comitton/callImage.cpp
-  comitton/TextCommon.cpp
-  comitton/callText.cpp
-  comitton/callUnrar.cpp
+# 依存ライブラリ内部ソースの重複ビルドを防止
+list(FILTER COMITTON_SOURCES EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/.*")
+list(FILTER COMITTON_SOURCES EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/libavif/.*")
+list(FILTER COMITTON_SOURCES EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/avif/.*")
+
+add_library(
+    comitton
+    SHARED
+    ${COMITTON_SOURCES}
 )
 
-# unrar ソース（jni/unrar を参照するため 相対パスは unrar/ ）
-set(
-  UNRAR_SOURCES
-  unrar/cmddata.cpp
-  unrar/consio.cpp
-  unrar/extract.cpp
-  unrar/filestr.cpp
-  unrar/recvol.cpp
-  unrar/rs.cpp
-  unrar/scantree.cpp
-  unrar/ui.cpp
+target_compile_definitions(
+    comitton
+    PRIVATE
+    SILENT
+    RARDLL
+    UNRAR
 )
 
-# unrar をスタティックライブラリとして作成
-add_library(unrar STATIC ${UNRAR_SOURCES})
-target_compile_definitions(unrar PRIVATE SILENT RARDLL)
-target_include_directories(unrar PUBLIC unrar)
+# ------------------------------------------------------------------------------
+# 3. インクルードディレクトリの設定
+# ------------------------------------------------------------------------------
+file(GLOB UNRAR_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/[Uu]nrar*")
 
-# comitton 共有ライブラリ作成
-add_library(comitton SHARED ${COMITTON_SOURCES})
-target_link_libraries(comitton unrar android jnigraphics log)
+set(EXTRA_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${UNRAR_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/libavif/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/avif/include
+)
 
-# JXL
-add_subdirectory(libjxl)
-target_sources(comitton PRIVATE comitton/ImageJXL.cpp)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/lib/include")
+    list(APPEND EXTRA_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/lib/include")
+endif()
 
-# 生成処理
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(
+    comitton
+    PRIVATE
+    ${EXTRA_INCLUDES}
+)
+
+# ------------------------------------------------------------------------------
+# 4. リンクライブラリの設定
+# ------------------------------------------------------------------------------
+find_library(log-lib log)
+find_library(android-lib android)
+find_library(jnigraphics-lib jnigraphics)
+
+set(LINK_LIBS
+    ${log-lib}
+    ${android-lib}
+    ${jnigraphics-lib}
+)
+
+if(TARGET jxl)
+    list(APPEND LINK_LIBS jxl)
+endif()
+if(TARGET jxl_threads)
+    list(APPEND LINK_LIBS jxl_threads)
+endif()
+if(TARGET avif)
+    list(APPEND LINK_LIBS avif)
+endif()
+
+target_link_libraries(
+    comitton
+    PRIVATE
+    ${LINK_LIBS}
+)

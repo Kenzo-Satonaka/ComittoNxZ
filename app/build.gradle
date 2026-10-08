@@ -1,253 +1,75 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
 }
 
-def packageName = "com.github.mikotomaniax.comittonxz"
-def applicationName = "ComittoNxZ"
-
-def versionMajor = 2
-def versionMinor = 4
-def versionPatch = 10
-def revision = "CK"
-
-// アプリに署名するため以下のファイルを作成して signingConfig の設定を記述してください
-// apply from:'../signingConfigs/release.gradle', to: android
-
 android {
-
-    signingConfigs {
-        release {
-        }
-        debug {
-        }
-    }
-
-    // namespace "jp.dip.muracoro.comittont"  ← コメントアウトまたは削除
-    namespace "com.github.mikotomaniax.comittonxz"
-    compileSdk 35 // Android 15
-
-    // 28にすると -lpthread が勝手に追加されてビルドできない時がある
-    // C言語の書式バージョン問題でビルドエラーが発生する場合はndkバージョンを24まで下げること
-    ndkVersion "30.0.14904198"
-    //ndkVersion "28.0.12674087"
-    //ndkVersion "27.0.12077973"
-    //ndkVersion "24.0.8215888"
+    namespace 'jp.comitto.nxz'
+    compileSdk 35
 
     defaultConfig {
-        applicationId packageName
-        targetSdk 35 // Android 15
-        minSdk 33 // Android 13 ("Tiramisu")
+        applicationId "jp.comitto.nxz"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
 
-        // 32ビット整数上限を超えない自動バージョン管理
-        versionCode Integer.parseInt(new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date()).substring(1))
-        versionName "1.0." + new java.text.SimpleDateFormat("yyMMddHHmm").format(new Date())
-        
-        // C++ビルド設定とCMakeオプションの集約（dav1d自動生成エラーの回避処理）
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Manifest のプレースホルダー定義
+        manifestPlaceholders = [
+            icon: "@android:drawable/sym_def_app_icon",
+            roundIcon: "@android:drawable/sym_def_app_icon",
+            app_name: "ComittoNxZ",
+            app_launch_name: "ComittoNxZ"
+        ]
+
+        // 不足している文字列リソースを自動生成
+        resValue "string", "app_name", "ComittoNxZ"
+        resValue "string", "app_launch_name", "ComittoNxZ"
+        resValue "string", "application_id", "jp.comitto.nxz"
+
         externalNativeBuild {
             cmake {
-                cppFlags += '-std=c++20'
                 arguments "-DANDROID_ARM_MODE=arm",
                           "-DAVIF_CODEC_DAV1D=OFF",
-                          "-DAVIF_LOCAL_DAV1D=OFF",
                           "-DAVIF_BUILD_APPS=OFF",
-                          "-DAVIF_BUILD_TESTS=OFF"
+                          "-DAVIF_BUILD_TESTS=OFF",
+                          "-DAVIF_LIBYUV=OFF"
             }
         }
 
-        // ビルド日時を参照できるようにする
-        buildConfigField("long", "BUILD_DATE", System.currentTimeMillis().toString())
-    }
-
-    applicationVariants.all { variant ->
-        variant.resValue 'string', 'application_id', variant.applicationId
-        if (variant.buildType.name == "release") {
-            variant.outputs.all {
-                outputFileName = "${applicationName}-${versionName}.apk"
-            }
-        } else if (variant.buildType.name == "debug"){
-            variant.outputs.all {
-                outputFileName = "${applicationName}[debug]-${versionName}.apk"
-            }
-        } else {
-            variant.outputs.all {
-                outputFileName = "${applicationName}[${variant.buildType.name}]-${versionName}.apk"
-            }
+        ndk {
+            abiFilters "arm64-v8a", "x86_64", "armeabi-v7a", "x86"
         }
     }
 
     buildTypes {
         release {
-            ndk {
-                abiFilters "arm64-v8a", "armeabi-v7a"//, "x86_64", "x86"
-            }
-            resValue("string", "app_name", applicationName)
-            resValue("string", "app_launch_name", applicationName)
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx")
-            manifestPlaceholders = [icon: "@drawable/comittonxx"]
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-        debug {
-            ndk {
-                abiFilters "arm64-v8a"
-            }
-            applicationIdSuffix ".debug"
-            resValue("string", "app_name", "${applicationName}[debug]")
-            resValue("string", "app_launch_name", "${applicationName}[debug]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_debug")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_debug"]
-            debuggable true
             minifyEnabled false
-            signingConfig signingConfigs.debug
-        }
-        debug32 {
-            ndk {
-                abiFilters "armeabi-v7a"
-            }
-            applicationIdSuffix ".debug32"
-            resValue("string", "app_name", "${applicationName}[debug32]")
-            resValue("string", "app_launch_name", "${applicationName}[deb32]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_debug")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_debug"]
-            debuggable true
-            minifyEnabled false
-            signingConfig signingConfigs.debug
-        }
-        arm64 {
-            ndk {
-                abiFilters "arm64-v8a"
-            }
-            applicationIdSuffix ".arm64"
-            resValue("string", "app_name", "${applicationName}[arm64]")
-            resValue("string", "app_launch_name", "${applicationName}[arm64]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_arm64")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_arm64"]
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-        arm32 {
-            ndk {
-                abiFilters "armeabi-v7a"
-            }
-            applicationIdSuffix ".arm32"
-            resValue("string", "app_name", "${applicationName}[arm32]")
-            resValue("string", "app_launch_name", "${applicationName}[arm32]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_arm32")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_arm32"]
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-        x64 {
-            ndk {
-                abiFilters "x86_64"
-            }
-            applicationIdSuffix ".x64"
-            resValue("string", "app_name", "${applicationName}[x64]")
-            resValue("string", "app_launch_name", "${applicationName}[x64]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_x64")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_x64"]
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-        x86 {
-            ndk {
-                abiFilters "x86"
-            }
-            applicationIdSuffix ".x86"
-            resValue("string", "app_name", "${applicationName}[x86]")
-            resValue("string", "app_launch_name", "${applicationName}[x86]")
-            buildConfigField("int", "icon", "${packageName}.R.drawable.comittonxx_x86")
-            manifestPlaceholders = [icon: "@drawable/comittonxx_x86"]
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
     externalNativeBuild {
         cmake {
-            path file('src/main/jni/CMakeLists.txt')
-            version '3.22.1'
+            path "src/main/jni/CMakeLists.txt"
+            version "3.22.1"
         }
-    }
-
-    productFlavors {
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-
-    kotlinOptions {
-        jvmTarget = '21'
-    }
-
-    buildFeatures {
-        buildConfig true
-    }
-
-    lint {
-        abortOnError false
-        checkReleaseBuilds false
-    }
 }
 
 dependencies {
-    // compileSdk 35 に対応した安定版バージョンへ修正
-    implementation 'androidx.activity:activity:1.9.3'
-    implementation 'androidx.activity:activity-ktx:1.9.3'
     implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'androidx.core:core:1.15.0'
-    implementation 'androidx.core:core-ktx:1.15.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
-    implementation 'androidx.documentfile:documentfile:1.0.1'
-    implementation 'androidx.fragment:fragment:1.8.5'
-    implementation "androidx.preference:preference:1.2.1"
-    implementation "androidx.viewpager2:viewpager2:1.1.0"
-    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'commons-io:commons-io:2.18.0'
-    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'com.github.aakira:expandable-layout:1.6.0'
 
-    // SMB接続用ライブラリjcifs(SMB1, SMB202, SMB210, SMB300, SMB311に対応)
-    implementation 'org.codelibs:jcifs:2.1.40'
-
-    // 文字コード判定用ライブラリ
-    // 2.5.0と2.0.4は同時リリースのため、Android 5でも使用できる2.0.4を選択する
-    implementation 'com.github.albfernandez:juniversalchardet:2.5.0'
-
-    implementation 'org.apache.commons:commons-compress:1.27.1'
-    implementation 'org.tukaani:xz:1.10' // これがないと7zのLZMA解凍でエラーになる
-
-    implementation 'com.sorrowblue.sevenzipjbinding:7-Zip-JBinding-4Android:16.02-2.4'
-    implementation 'androidx.webkit:webkit:1.12.1'
-
-    implementation('io.documentnode:epub4j-core:4.2.3') {
-        // 以下の2つがAndroid標準と衝突するため除外する
-        exclude group: 'xmlpull', module: 'xmlpull'
-        exclude group: 'net.sf.kxml', module: 'kxml2'
-    }
-
-    implementation 'org.jsoup:jsoup:1.18.3'
-
-    implementation 'com.google.code.findbugs:jsr305:3.0.2'
-
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
