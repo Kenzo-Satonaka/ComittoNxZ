@@ -63,11 +63,10 @@ set(EXTRA_INCLUDES
     ${UNRAR_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/libavif/include
     ${CMAKE_CURRENT_SOURCE_DIR}/avif/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/libjxl
+    ${CMAKE_CURRENT_SOURCE_DIR}/libjxl/lib/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/libjxl/deps/ggable/include
 )
-
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/lib/include")
-    list(APPEND EXTRA_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/libjxl/lib/include")
-endif()
 
 target_include_directories(
     comitton

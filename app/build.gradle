@@ -3,7 +3,8 @@ plugins {
 }
 
 android {
-    namespace 'jp.comitto.nxz'
+    // RクラスおよびBuildConfig生成用パッケージ名（ソースコード内の参照に合わせる）
+    namespace 'com.github.mikotomaniax.comittonxz'
     compileSdk 35
 
     defaultConfig {
@@ -43,6 +44,11 @@ android {
         }
     }
 
+    buildFeatures {
+        // AGP 8.0以降で BuildConfig の自動生成を有効化
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -64,11 +70,29 @@ android {
 }
 
 dependencies {
+    // AndroidX & UI ライブラリ
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.preference:preference:1.2.1'
-    implementation 'com.github.aakira:expandable-layout:1.6.0'
+    implementation 'com.github.aakira:expandable-layout:v1.6.0'
 
+    // ユーティリティ・解析系外部ライブラリ
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
+
+    // 7z / SMB / ePub 解析用リモート依存関係
+    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.01'
+    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding-all:16.02-2.01'
+    implementation 'org.codelibs:jcifs:2.1.35'
+    implementation 'io.documentnode:epub4j-core:3.1.0'
+
+    // Lombok (アノテーションプロセッサ設定)
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // テストライブラリ
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
