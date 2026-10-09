@@ -1,3 +1,4 @@
+#include "rar.hpp"
 bool ExtractHardlink(CommandData *Cmd,wchar *NameNew,wchar *NameExisting,size_t NameExistingSize)
 {
   if (!FileExist(NameExisting))

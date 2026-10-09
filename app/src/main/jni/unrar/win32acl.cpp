@@ -1,3 +1,4 @@
+#include "rar.hpp"
 static void SetACLPrivileges();
 
 static bool ReadSacl=false;

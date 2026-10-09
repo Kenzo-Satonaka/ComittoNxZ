@@ -1,3 +1,4 @@
+#include "rar.hpp"
 FragmentedWindow::FragmentedWindow()
 {
   memset(Mem,0,sizeof(Mem));

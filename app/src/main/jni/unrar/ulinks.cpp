@@ -1,3 +1,4 @@
+#include "rar.hpp"
 
 
 static bool UnixSymlink(CommandData *Cmd,const char *Target,const wchar *LinkName,RarTime *ftm,RarTime *fta)

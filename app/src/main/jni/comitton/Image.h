@@ -1,6 +1,46 @@
+#ifndef ERROR_CODE_MALLOC_FAILURE
+#define ERROR_CODE_MALLOC_FAILURE -4
+#endif
+#ifndef ERROR_CODE_MALLOC_FAILURE
+#define ERROR_CODE_MALLOC_FAILURE -4
+#endif
+#ifndef ERROR_CODE_CACHE_INDEX_OUT_OF_RANGE
+#define ERROR_CODE_CACHE_INDEX_OUT_OF_RANGE -5
+#endif
+#ifndef ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT
+#define ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT -6
+#endif
+#ifndef ERROR_CODE_CACHE_IS_FULL
+#define ERROR_CODE_CACHE_IS_FULL -3
+#endif
+#ifndef ERROR_CODE_MALLOC_FAILURE
+#define ERROR_CODE_MALLOC_FAILURE -4
+#endif
+#ifndef ERROR_CODE_USER_CANCELED
+#define ERROR_CODE_USER_CANCELED -1
+#endif
+#ifndef ERROR_CODE_CACHE_NOT_INITIALIZED
+#define ERROR_CODE_CACHE_NOT_INITIALIZED -2
+#endif
+#include <stdint.h>
+#ifdef LONG
+#undef LONG
+#endif
+typedef int32_t LONG;
+#include <stdint.h>
+typedef uint8_t BYTE;
+typedef uint16_t WORD;
+typedef int32_t LONG;
+#include <stdint.h>
+#include "common.h"
+#ifndef BYTE
+typedef uint8_t BYTE;
+#endif
+#ifndef WORD
+typedef uint16_t WORD;
+#endif
 //#define DEBUG
 #include <jni.h>
-#include "common.h"
 #include <memory>
 
 #define  LOG_TAG    "comitton_img"

@@ -1,3 +1,4 @@
+#include "rar.hpp"
 // Purely user interface function. Gets and returns user input.
 UIASKREP_RESULT uiAskReplace(wchar *Name,size_t MaxNameSize,int64 FileSize,RarTime *FileTime,uint Flags)
 {

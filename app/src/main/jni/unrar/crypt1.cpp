@@ -1,3 +1,4 @@
+#include "rar.hpp"
 extern uint CRCTab[256];
 
 void CryptData::SetKey13(const char *Password)

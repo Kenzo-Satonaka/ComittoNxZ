@@ -1,5 +1,7 @@
 // Based on public domain code written in 2012 by Samuel Neves
 
+#include "rar.hpp"
+
 extern const byte blake2s_sigma[10][16];
 
 // Initialization vector.

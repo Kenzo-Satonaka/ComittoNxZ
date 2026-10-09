@@ -10,6 +10,22 @@
    You should have received a copy of the CC0 Public Domain Dedication along with
    this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 */
+#include "rar.hpp"
+
+#ifndef ALLOW_SSE
+#ifndef blake2s_init_param
+#define blake2s_init_param blake2s_init_param
+#endif
+#ifndef blake2s_update
+#define blake2s_update blake2s_update
+#endif
+#ifndef blake2s_final
+#define blake2s_final blake2s_final
+#endif
+#ifndef blake2s_init
+#define blake2s_init blake2s_init
+#endif
+#endif
 
 #define PARALLELISM_DEGREE 8
 

@@ -1,3 +1,4 @@
+#include "rar.hpp"
 #define UNP_READ_SIZE_MT        0x400000
 #define UNP_BLOCKS_PER_THREAD          2
 

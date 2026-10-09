@@ -1,3 +1,4 @@
+#include "common.h"
 #include <jni.h>
 #include <time.h>
 #include <malloc.h>

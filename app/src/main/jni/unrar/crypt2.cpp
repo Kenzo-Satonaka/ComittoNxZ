@@ -1,3 +1,4 @@
+#include "rar.hpp"
 #define NROUNDS 32
 
 #define substLong(t) ( (uint)SubstTable20[(uint)t&255] | \

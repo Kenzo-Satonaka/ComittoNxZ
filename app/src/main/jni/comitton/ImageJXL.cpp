@@ -1,3 +1,4 @@
+#include "common.h"
 #include <android/log.h>
 #include <cstring>
 #include <vector>

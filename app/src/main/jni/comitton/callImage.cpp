@@ -1,3 +1,4 @@
+#include "common.h"
 #include <jni.h>
 #include <malloc.h>
 #include <android/log.h>

@@ -1,3 +1,4 @@
+#include "rar.hpp"
 
 
 #ifdef _WIN_ALL

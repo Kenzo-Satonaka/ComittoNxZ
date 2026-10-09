@@ -1,20 +1,28 @@
-//
-// Created by User on 2025/01/24.
-//
+#include <stdint.h>
+#include <sys/types.h>
+#ifdef LONG
+#undef LONG
+#endif
+#ifndef BYTE
+typedef uint8_t BYTE;
+#endif
+#ifndef WORD
+typedef uint16_t WORD;
+#endif
+#include "rar.hpp"
 
-#ifndef COMITTONXX_COMMON_H
-#define COMITTONXX_COMMON_H
+#if defined(ALLOW_SSE)
 
-typedef u_int32_t   LONG;
-typedef	u_int16_t	WORD;
-typedef	u_int8_t	BYTE;
+static __m128i blake2s_IV_0_3, blake2s_IV_4_7;
 
-#define ERROR_CODE_MALLOC_FAILURE -1001
-#define ERROR_CODE_CACHE_COUNT_LIMIT_EXCEEDED -1002
-#define ERROR_CODE_CACHE_INDEX_OUT_OF_RANGE -1003
-#define ERROR_CODE_CACHE_NOT_INITIALIZED -1004
-#define ERROR_CODE_CACHE_IS_FULL -1005
-#define ERROR_CODE_IMAGE_TYPE_NOT_SUPPORT -1006
-#define ERROR_CODE_USER_CANCELED -1007
+static void blake2s_init_sse()
+{
+  static bool InitDone = false;
+  if (InitDone)
+    return;
+  blake2s_IV_0_3 = _mm_setr_epi32( 0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A );
+  blake2s_IV_4_7 = _mm_setr_epi32( 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19 );
+  InitDone = true;
+}
 
-#endif //COMITTONXX_COMMON_H
+#endif

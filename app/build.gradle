@@ -16,6 +16,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        // BuildConfig に定義する動的・リソース定数
+        buildConfigField "long", "BUILD_DATE", "${System.currentTimeMillis()}L"
+        buildConfigField "int", "icon", "com.github.mikotomaniax.comittonxz.R.drawable.icon"
+
         // Manifest のプレースホルダー定義
         manifestPlaceholders = [
             icon: "@android:drawable/sym_def_app_icon",
@@ -35,7 +39,17 @@ android {
                           "-DAVIF_CODEC_DAV1D=OFF",
                           "-DAVIF_BUILD_APPS=OFF",
                           "-DAVIF_BUILD_TESTS=OFF",
-                          "-DAVIF_LIBYUV=OFF"
+                          "-DAVIF_LIBYUV=OFF",
+                          "-DJPEGXL_ENABLE_SJPEG=OFF",
+                          "-DJPEGXL_ENABLE_BENCHMARK=OFF",
+                          "-DJPEGXL_ENABLE_EXAMPLES=OFF",
+                          "-DJPEGXL_ENABLE_MANPAGES=OFF",
+                          "-DJPEGXL_ENABLE_TOOLS=OFF",
+                          "-DJPEGXL_ENABLE_JPEGLI=OFF",
+                          "-DJPEGXL_ENABLE_DOXYGEN=OFF",
+                          "-DJPEGXL_ENABLE_TESTS=OFF",
+                          "-DJPEGXL_ENABLE_DEV=OFF",
+                          "-DBUILD_TESTING=OFF"
             }
         }
 
@@ -74,7 +88,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.preference:preference:1.2.1'
-    implementation 'com.github.aakira:expandable-layout:v1.6.0'
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
 
     // ユーティリティ・解析系外部ライブラリ
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -82,11 +96,16 @@ dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 
-    // 7z / SMB / ePub 解析用リモート依存関係
+    // 7z / SMB / ePub 解析用リモート依存関係（Maven Central 公式・標準構成）
     implementation 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.01'
-    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding-all:16.02-2.01'
+    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding-all-platforms:16.02-2.01'
     implementation 'org.codelibs:jcifs:2.1.35'
-    implementation 'io.documentnode:epub4j-core:3.1.0'
+    implementation ('io.documentnode:epub4j-core:4.2.1') {
+        exclude group: 'xmlpull', module: 'xmlpull'
+    }
+
+    // app/libs フォルダ内のローカル jar/aar ファイル一括読み込み
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     // Lombok (アノテーションプロセッサ設定)
     compileOnly 'org.projectlombok:lombok:1.18.30'

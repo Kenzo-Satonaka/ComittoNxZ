@@ -1,3 +1,4 @@
+#include "rar.hpp"
 void Unpack::Unpack5(bool Solid)
 {
   FileExtracted=true;

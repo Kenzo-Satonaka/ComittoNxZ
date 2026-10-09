@@ -1,3 +1,4 @@
+#include "rar.hpp"
 static SOUND_NOTIFY_MODE uiSoundNotify;
 
 void uiInit(SOUND_NOTIFY_MODE Sound)
