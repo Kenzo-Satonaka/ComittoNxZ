@@ -11,6 +11,9 @@
    this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 */
 #include "rar.hpp"
+void blake2s_init_param( blake2s_state *S, uint32 node_offset, uint32 node_depth );
+void blake2s_update( blake2s_state *S, const byte *in, size_t inlen );
+void blake2s_final( blake2s_state *S, byte *digest );
 
 #ifndef ALLOW_SSE
 #ifndef blake2s_init_param

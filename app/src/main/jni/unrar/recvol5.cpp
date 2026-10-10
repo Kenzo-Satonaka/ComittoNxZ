@@ -39,7 +39,7 @@ RecVolumes5::RecVolumes5(CommandData *Cmd,bool TestOnly)
 #ifdef RAR_SMP
     RecThreadPool=new ThreadPool(MaxUserThreads);
 #endif
-    RealBuf=new byte[TotalBufferSize+SSE_ALIGNMENT];
+    RealBuf=new byte[RecBufferSize+SSE_ALIGNMENT];
     Buf=(byte *)ALIGN_VALUE(RealBuf,SSE_ALIGNMENT);
   }
 }
@@ -358,7 +358,7 @@ bool RecVolumes5::Restore(CommandData *Cmd,const wchar *Name,bool Silent)
   }
 
   // Size of per file buffer.
-  RecBufferSize=TotalBufferSize/MissingVolumes;
+  RecBufferSize=RecBufferSize/MissingVolumes;
   if ((RecBufferSize&1)==1) // Must be even for our RS16 codec.
     RecBufferSize--;
 #ifdef USE_SSE

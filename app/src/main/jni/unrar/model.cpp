@@ -1,4 +1,15 @@
 #include "rar.hpp"
+#ifndef ARI_DEC_NORMALIZE
+#define ARI_DEC_NORMALIZE(code,low,range,read) \
+{ \
+  while ((low^(low+range))<TOP || range<BOT && ((range=-(int)low&(BOT-1)),1)) \
+  { \
+    code=(code << 8) | read->GetChar(); \
+    range <<= 8; \
+    low <<= 8; \
+  } \
+}
+#endif
 /****************************************************************************
  *  This file is part of PPMd project                                       *
  *  Written and distributed to public domain by Dmitry Shkarin 1997,        *

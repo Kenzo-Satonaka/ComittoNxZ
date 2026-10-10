@@ -1,3 +1,4 @@
+#include "Image.h"
 #include "common.h"
 #include <malloc.h>
 #include <string.h>

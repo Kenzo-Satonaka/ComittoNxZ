@@ -6,9 +6,9 @@
 #include "blake2s_sse.cpp"
 #endif
 
-static void blake2s_init_param( blake2s_state *S, uint32 node_offset, uint32 node_depth);
-static void blake2s_update( blake2s_state *S, const byte *in, size_t inlen );
-static void blake2s_final( blake2s_state *S, byte *digest );
+void blake2s_init_param( blake2s_state *S, uint32 node_offset, uint32 node_depth);
+void blake2s_update( blake2s_state *S, const byte *in, size_t inlen );
+void blake2s_final( blake2s_state *S, byte *digest );
 
 #include "blake2sp.cpp"
 
@@ -83,7 +83,7 @@ void blake2s_init_param( blake2s_state *S, uint32 node_offset, uint32 node_depth
   b = rotr32(b ^ c, 7);
 
 
-static void blake2s_compress( blake2s_state *S, const byte block[BLAKE2S_BLOCKBYTES] )
+void blake2s_compress( blake2s_state *S, const byte block[BLAKE2S_BLOCKBYTES] )
 {
   uint32 m[16];
   uint32 v[16];

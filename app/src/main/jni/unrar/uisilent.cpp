@@ -5,6 +5,19 @@ UIASKREP_RESULT uiAskReplace(wchar *Name,size_t MaxNameSize,int64 FileSize,RarTi
   return UIASKREP_R_REPLACE;
 }
 
+UIASKREP_RESULT uiAskReplaceEx(CommandData *Cmd, wchar_t *Name, unsigned long MaxNameSize, long FileSize, RarTime *FileTime, unsigned int Flags)
+{
+  return UIASKREP_R_REPLACE;
+}
+
+void ComprDataIO::ShowUnpRead(int64 Size, int64 CompressedSize)
+{
+}
+
+void Wait()
+{
+}
+
 
 
 
